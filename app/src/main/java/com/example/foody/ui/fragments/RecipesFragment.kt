@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_recipes_fragment.view.*
 
 
 class RecipesFragment : Fragment() {
@@ -16,6 +18,8 @@ class RecipesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recipes_fragment, container, false)
+        val view =  inflater.inflate(R.layout.fragment_recipes_fragment, container, false)
+        view.recyclerview.showShimmer()
+        return view
     }
 }

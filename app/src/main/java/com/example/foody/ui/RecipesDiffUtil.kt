@@ -1,9 +1,8 @@
 package com.example.foody.ui
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.foody.models.ApiResult
 
-class RecipesDiffUtill<T>(
+class RecipesDiffUtil<T>(
     private  val oldList : List<T>,
     private  val  newList : List<T>)
     :DiffUtil.Callback() {

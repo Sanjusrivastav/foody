@@ -12,10 +12,10 @@ class RecipesBinding {
 
           @BindingAdapter("readApiResponse", "readDatabase", requireAll = true)
           @JvmStatic
-
           fun errorImageViewVisibility(
-               imageView: ImageView, apiResponse: NetworkResult<FoodRecipe>?,
-               database: List<RecipesEntity>
+               imageView: ImageView,
+               apiResponse: NetworkResult<FoodRecipe>?,
+               database: List<RecipesEntity>?
           ) {
                if (apiResponse is NetworkResult.Error && database.isNullOrEmpty()) {
                     imageView.visibility = View.VISIBLE
@@ -25,16 +25,14 @@ class RecipesBinding {
                } else if (apiResponse is NetworkResult.Success){
                     imageView.visibility = View.INVISIBLE
 
-
           }
      }
 
      @BindingAdapter("readApiResponse2", "readDatabase2", requireAll = true)
-
-
+     @JvmStatic
      fun errorTextViewVisibility(
           textView: TextView, apiResponse: NetworkResult<FoodRecipe>?,
-          database: List<RecipesEntity>
+          database: List<RecipesEntity>?
      ) {
           if (apiResponse is NetworkResult.Error && database.isNullOrEmpty()) {
                textView.visibility = View.VISIBLE
@@ -44,7 +42,6 @@ class RecipesBinding {
 
           } else if (apiResponse is NetworkResult.Success) {
                textView.visibility = View.INVISIBLE
-
 
           }
      }

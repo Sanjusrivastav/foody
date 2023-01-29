@@ -1,4 +1,4 @@
-package com.example.foody
+package com.example.foody.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.navArgs
+import com.example.foody.R
 import com.example.foody.adapter.PagerAdapter
 import com.example.foody.data.Network.FavoritesEntity
 import com.example.foody.ui.fragments.Constants.Companion.RECIPES_RESULT_KEY
@@ -24,7 +25,7 @@ import kotlinx.android.synthetic.main.activity_details.*
 @AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
 
-    private val args by navArgs<>
+    private val args by navArgs<DetailsActivityArgs>()
     private val mainViewModel: MainViewModel by viewModels()
 
     private var recipeSaved = false
@@ -34,8 +35,8 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
-        setSupportActionBar(toolbar)
-        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
+        setSupportActionBar(toolBar)
+        toolBar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val fragments = ArrayList<Fragment>()
@@ -49,7 +50,7 @@ class DetailsActivity : AppCompatActivity() {
         titles.add("Instructions")
 
         val resultBundle = Bundle()
-        resultBundle.putParcelable(RECIPES_RESULT_KEY, args.result)
+        resultBundle.putParcelable(RECIPES_RESULT_KEY, args.apiResult)
 
         val adapter = PagerAdapter(
             resultBundle,
@@ -84,7 +85,7 @@ class DetailsActivity : AppCompatActivity() {
         mainViewModel.readFavoriteRecipes.observe(this) { favoritesEntity ->
             try {
                 for (savedRecipe in favoritesEntity) {
-                    if (savedRecipe.result.recipeId == args.result.recipeId) {
+                    if (savedRecipe.result.recipeId == args.apiResult.recipeId) {
                         changeMenuItemColor(menuItem, R.color.yellow)
                         savedRecipeId = savedRecipe.id
                         recipeSaved = true
@@ -102,7 +103,7 @@ class DetailsActivity : AppCompatActivity() {
         val favoritesEntity =
             FavoritesEntity(
                 0,
-                args.result
+                args.apiResult
             )
         mainViewModel.insertFavoriteRecipe(favoritesEntity)
         changeMenuItemColor(item, R.color.yellow)
@@ -113,7 +114,7 @@ class DetailsActivity : AppCompatActivity() {
         val favoritesEntity =
             FavoritesEntity(
                 savedRecipeId,
-                args.result
+                args.apiResult
             )
         mainViewModel.deleteFavoriteRecipe(favoritesEntity)
         changeMenuItemColor(item, R.color.white)
@@ -123,7 +124,7 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun showSnackBar(message: String) {
         Snackbar.make(
-            detailsLayout,
+            detailLayout,
             message,
             Snackbar.LENGTH_SHORT
         ).setAction("Okay") {}
@@ -131,7 +132,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun changeMenuItemColor(item: MenuItem, color: Int) {
-        item.icon.setTint(ContextCompat.getColor(this, color))
+        item.icon?.setTint(ContextCompat.getColor(this, color))
     }
 }
 

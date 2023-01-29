@@ -3,6 +3,7 @@
     <color name="colorPrimary">#6200EA</color>
     <color name="colorPrimaryDark">#5502c8</color>
     <color name="colorAccent">#9D46FF</color>
+
     <color name="white">#FFFFFFFF</color>
     <color name="lightGray">#F9F9F9</color>
     <color name="mediumGray">#D1D1D1</color>
@@ -14,6 +15,16 @@
     <color name="red">#FF4646</color>
     <color name="yellow">#FFC114</color>
     <color name="green">#00C980</color>
+
+    // Custom Chip Style
+    <color name="checkedChipBackgroundColor">#203F0491</color>
+    <color name="ChipBackgroundColor">@color/lightGray</color>
+    <color name="checkedChipTextColor">#5F0DD1</color>
+    <color name="chipTextColor">@color/darkGray</color>
+    
+    <color name="actionBarBackgroundColor">@color/colorPrimary</color>
+
+
 </resources>
 
 

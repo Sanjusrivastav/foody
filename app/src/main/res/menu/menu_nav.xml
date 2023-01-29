@@ -10,7 +10,7 @@
 
     <item android:id="@+id/FoodJokeFragment"
         android:title="@string/foodjoke"
-        android:icon="@drawable/ic_emoji_emotions"/>
+        android:icon="@drawable/ic_sad"/>
 
 
 </menu>

@@ -1,4 +1,4 @@
-package com.example.foody.viewModel
+package com.example.foody.data.Network
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

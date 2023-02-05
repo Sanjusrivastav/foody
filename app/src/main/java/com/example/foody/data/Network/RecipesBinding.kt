@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.example.foody.NetworkResult
+import com.example.foody.di.entities.RecipesEntity
 import com.example.foody.models.FoodRecipe
 
 class RecipesBinding {

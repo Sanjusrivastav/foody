@@ -1,8 +1,8 @@
 package com.example.foody.di
 
 import androidx.room.*
-import com.example.foody.data.Network.RecipesEntity
-import com.example.foody.data.Network.FavoritesEntity
+import com.example.foody.di.entities.RecipesEntity
+import com.example.foody.di.entities.FavoritesEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao

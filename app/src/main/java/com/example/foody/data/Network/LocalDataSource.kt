@@ -1,6 +1,8 @@
 package com.example.foody.data.Network
 
 import com.example.foody.di.RecipesDao
+import com.example.foody.di.entities.FavoritesEntity
+import com.example.foody.di.entities.RecipesEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -9,7 +11,7 @@ class LocalDataSource @Inject constructor(
     private val recipesDao: RecipesDao
 ) {
 
-    fun readDatabase(): Flow<List<RecipesEntity>> {
+    fun readRecipes(): Flow<List<RecipesEntity>> {
         return recipesDao.readRecipes()
     }
 

@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.navArgs
 import com.example.foody.R
 import com.example.foody.adapter.PagerAdapter
-import com.example.foody.data.Network.FavoritesEntity
+import com.example.foody.di.entities.FavoritesEntity
 import com.example.foody.ui.fragments.Constants.Companion.RECIPES_RESULT_KEY
 import com.example.foody.ui.fragments.IngredientsFragment
 import com.example.foody.ui.fragments.InstructionsFragment
@@ -85,7 +85,7 @@ class DetailsActivity : AppCompatActivity() {
         mainViewModel.readFavoriteRecipes.observe(this) { favoritesEntity ->
             try {
                 for (savedRecipe in favoritesEntity) {
-                    if (savedRecipe.result.recipeId == args.apiResult.recipeId) {
+                    if (savedRecipe.result.id == args.apiResult.id ) {
                         changeMenuItemColor(menuItem, R.color.yellow)
                         savedRecipeId = savedRecipe.id
                         recipeSaved = true
@@ -118,8 +118,8 @@ class DetailsActivity : AppCompatActivity() {
             )
         mainViewModel.deleteFavoriteRecipe(favoritesEntity)
         changeMenuItemColor(item, R.color.white)
-        showSnackBar("Removed from Favorites.")
-        recipeSaved = false
+        showSnackBar("Removed From Favorites.")
+        recipeSaved  = false
     }
 
     private fun showSnackBar(message: String) {

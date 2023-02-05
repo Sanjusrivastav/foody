@@ -1,4 +1,4 @@
-package com.example.foody.data.Network
+package com.example.foody.di.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

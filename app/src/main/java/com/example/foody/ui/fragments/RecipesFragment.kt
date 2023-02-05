@@ -1,5 +1,6 @@
 package com.example.foody
 
+import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -12,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foody.adapter.RecipesAdapter
+import com.example.foody.data.Network.LocalDataSource
 import com.example.foody.viewModel.MainViewModel
 import com.example.foody.data.Network.RecipesViewModel
 import com.example.foody.data.Network.observeOnce
@@ -20,19 +22,18 @@ import com.example.foody.ui.NetworkListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @AndroidEntryPoint
 class RecipesFragment : Fragment() ,SearchView.OnQueryTextListener{
+
     private  val args  by navArgs<RecipesFragmentArgs>()
-
-
     private var _binding: FragmentRecipesFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var mainViewModel: MainViewModel
+    private lateinit var mainViewModel : MainViewModel
     private lateinit var recipesViewModel: RecipesViewModel
     private val mAdapter by lazy { RecipesAdapter() }
-
     private  lateinit var networkListener: NetworkListener
 
     override fun onCreate(savedInstanceState: Bundle?) {

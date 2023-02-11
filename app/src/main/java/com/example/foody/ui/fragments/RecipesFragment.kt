@@ -26,15 +26,15 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @AndroidEntryPoint
-class RecipesFragment : Fragment() ,SearchView.OnQueryTextListener{
+class RecipesFragment : Fragment(), SearchView.OnQueryTextListener {
 
-    private  val args  by navArgs<RecipesFragmentArgs>()
+    private val args by navArgs<RecipesFragmentArgs>()
     private var _binding: FragmentRecipesFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var mainViewModel : MainViewModel
+    private lateinit var mainViewModel: MainViewModel
     private lateinit var recipesViewModel: RecipesViewModel
     private val mAdapter by lazy { RecipesAdapter() }
-    private  lateinit var networkListener: NetworkListener
+    private lateinit var networkListener: NetworkListener
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +51,7 @@ class RecipesFragment : Fragment() ,SearchView.OnQueryTextListener{
         _binding = FragmentRecipesFragmentBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.mainViewModel = mainViewModel
-      setHasOptionsMenu(true)
+        setHasOptionsMenu(true)
 
         setupRecyclerView()
 
@@ -60,23 +60,22 @@ class RecipesFragment : Fragment() ,SearchView.OnQueryTextListener{
         }
 
         lifecycleScope.launch {
-             networkListener = NetworkListener()
-             networkListener.checkNetworkAvailability(requireContext())
-                 .collect{
-                     status ->
-                     Log.d("NetworkListener",status.toString())
-                     recipesViewModel.networkStatus = status
-                     recipesViewModel.showNetworkStatus()
-                     requestApiData()
+            networkListener = NetworkListener()
+            networkListener.checkNetworkAvailability(requireContext())
+                .collect { status ->
+                    Log.d("NetworkListener", status.toString())
+                    recipesViewModel.networkStatus = status
+                    recipesViewModel.showNetworkStatus()
+                    requestApiData()
 
-                 }
-         }
+                }
+        }
 
         binding.recipesFAB.setOnClickListener {
-            if(recipesViewModel.networkStatus){
+            if (recipesViewModel.networkStatus) {
                 findNavController().navigate(R.id.action_RecipesFragment_to_recipesBottomSheet)
 
-            }else{
+            } else {
                 recipesViewModel.showNetworkStatus()
             }
 
@@ -88,7 +87,7 @@ class RecipesFragment : Fragment() ,SearchView.OnQueryTextListener{
     private fun readDatabase() {
         lifecycleScope.launch {
             mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
-                if (database.isNotEmpty()&& !args.backfrombottomSheet) {
+                if (database.isNotEmpty() && !args.backfrombottomSheet) {
                     Log.d("RecipesFragment", "readDatabase called!")
                     mAdapter.setData(database[0].foodRecipe)
                     hideShimmerEffect()
@@ -108,6 +107,7 @@ class RecipesFragment : Fragment() ,SearchView.OnQueryTextListener{
     private fun showShimmerEffect() {
         binding.recyclerview.showShimmer()
     }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.recipes_menu, menu)
 
@@ -118,15 +118,15 @@ class RecipesFragment : Fragment() ,SearchView.OnQueryTextListener{
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        if(query != null) {
+        if (query != null) {
             searchApiData(query)
         }
         return true
     }
+
     override fun onQueryTextChange(query: String?): Boolean {
         return true
     }
-
 
 
     private fun searchApiData(searchQuery: String) {
@@ -155,7 +155,6 @@ class RecipesFragment : Fragment() ,SearchView.OnQueryTextListener{
         }
 
     }
-
 
 
     private fun requestApiData() {
@@ -202,8 +201,6 @@ class RecipesFragment : Fragment() ,SearchView.OnQueryTextListener{
         super.onDestroy()
         _binding = null
     }
-
-
 
 
 }

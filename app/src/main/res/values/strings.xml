@@ -40,6 +40,9 @@
     <string name="no_favorite_recipes">No_Favorite_Recipes</string>
     <string name="textview">TextView</string>
     <string name="delete_favorite_menu">Delete_favorite_menu</string>
+    <string name="delete_all">Delete_all</string>
+    <string name="lorem_ipsum">Lorem_ipsum</string>
+    <string name="share">Share</string>
 
 
 </resources>
